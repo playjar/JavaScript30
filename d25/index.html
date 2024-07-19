@@ -5,8 +5,8 @@
   <title>Understanding JavaScript's Capture</title>
   <link rel="icon" href="https://fav.farm/🔥" />
 </head>
-<body class="bod">
 
+<body class="bod">
   <div class="one">
     <div class="two">
       <div class="three">
@@ -41,9 +41,27 @@
   }
 </style>
 
-<button></button>
-<script>
+  <button></button>
+  
+  <script>
+    const divs = document.querySelectorAll("div");
+    const button = document.querySelector("button");
 
-</script>
+    function logText(e) {
+      console.log(this.classList.value);
+      // e.stopPropagation(); // stop bubbling!
+    }
+
+    divs.forEach(div => div.addEventListener("click", logText, {
+      capture: false,
+      once: false,
+    }));
+
+    button.addEventListener("click", () => {
+      console.log("button clicked!");
+    }, {
+      once: true, // unbind after first trigger
+    })
+  </script>
 </body>
 </html>
